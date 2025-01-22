@@ -1,51 +1,27 @@
 plugins {
-    id("multiloader-platform")
-
-    id("fabric-loom") version ("1.8.9")
+    java
+    idea
+    `maven-publish`
+    id("fabric-loom") version("1.9.2")
 }
+
+val MINECRAFT_VERSION: String by rootProject.extra
+val FABRIC_LOADER_VERSION: String by rootProject.extra
+val FABRIC_API_VERSION: String by rootProject.extra
+val MOD_VERSION: String by rootProject.extra
+
 
 base {
-    archivesName = "sodium-fabric"
-}
-
-val configurationCommonModJava: Configuration = configurations.create("commonJava") {
-    isCanBeResolved = true
-}
-val configurationCommonModResources: Configuration = configurations.create("commonResources") {
-    isCanBeResolved = true
+    archivesName.set("sodium-fabric-${MINECRAFT_VERSION}")
 }
 
 dependencies {
-    configurationCommonModJava(project(path = ":common", configuration = "commonMainJava"))
-    configurationCommonModJava(project(path = ":common", configuration = "commonApiJava"))
-    configurationCommonModJava(project(path = ":common", configuration = "commonEarlyLaunchJava"))
-
-    configurationCommonModResources(project(path = ":common", configuration = "commonMainResources"))
-    configurationCommonModResources(project(path = ":common", configuration = "commonApiResources"))
-    configurationCommonModResources(project(path = ":common", configuration = "commonEarlyLaunchResources"))
-}
-
-sourceSets.apply {
-    main {
-        compileClasspath += configurationCommonModJava
-        runtimeClasspath += configurationCommonModJava
-    }
-}
-
-dependencies {
-    minecraft("com.mojang:minecraft:${BuildConfig.MINECRAFT_VERSION}")
-    mappings(loom.layered {
-        officialMojangMappings()
-
-        if (BuildConfig.PARCHMENT_VERSION != null) {
-            parchment("org.parchmentmc.data:parchment-${BuildConfig.MINECRAFT_VERSION}:${BuildConfig.PARCHMENT_VERSION}@zip")
-        }
-    })
-
-    modImplementation("net.fabricmc:fabric-loader:${BuildConfig.FABRIC_LOADER_VERSION}")
+    minecraft("com.mojang:minecraft:${MINECRAFT_VERSION}")
+    mappings(loom.officialMojangMappings())
+    modImplementation("net.fabricmc:fabric-loader:$FABRIC_LOADER_VERSION")
 
     fun addEmbeddedFabricModule(name: String) {
-        val module = fabricApi.module(name, BuildConfig.FABRIC_API_VERSION)
+        val module = fabricApi.module(name, FABRIC_API_VERSION)
         modImplementation(module)
         include(module)
     }
@@ -57,20 +33,29 @@ dependencies {
     addEmbeddedFabricModule("fabric-rendering-data-attachment-v1")
     addEmbeddedFabricModule("fabric-rendering-fluids-v1")
     addEmbeddedFabricModule("fabric-resource-loader-v0")
+    include(implementation(group = "com.lodborg", name = "interval-tree", version = "1.0.0"))
+
+    implementation("com.google.code.findbugs:jsr305:3.0.1")
+    compileOnly(project(":common"))
 }
 
 loom {
-    accessWidenerPath.set(file("src/main/resources/sodium-fabric.accesswidener"))
+    if (project(":common").file("src/main/resources/sodium.accesswidener").exists())
+        accessWidenerPath.set(project(":common").file("src/main/resources/sodium.accesswidener"))
 
-    mixin {
-        useLegacyMixinAp = false
-    }
+    @Suppress("UnstableApiUsage")
+    mixin { defaultRefmapName.set("sodium.refmap.json") }
 
     runs {
         named("client") {
             client()
-            configName = "Fabric/Client"
-            appendProjectPathToConfigName = false
+            configName = "Fabric Client"
+            ideConfigGenerated(true)
+            runDir("run")
+        }
+        named("server") {
+            server()
+            configName = "Fabric Server"
             ideConfigGenerated(true)
             runDir("run")
         }
@@ -78,15 +63,40 @@ loom {
 }
 
 tasks {
-    jar {
-        from(configurationCommonModJava)
+    withType<JavaCompile> {
+        source(project(":common").sourceSets.main.get().allSource)
+        source(project(":common").sourceSets.getByName("api").allSource)
+        source(project(":common").sourceSets.getByName("workarounds").allSource)
     }
 
-    remapJar {
-        destinationDirectory.set(file(rootProject.layout.buildDirectory).resolve("mods"))
-    }
+    javadoc { source(project(":common").sourceSets.main.get().allJava) }
 
     processResources {
-        from(configurationCommonModResources)
+        from(project(":common").sourceSets.main.get().resources) {
+            exclude("sodium.accesswidener")
+        }
+
+        inputs.property("version", project.version)
+
+        filesMatching("fabric.mod.json") {
+            expand(mapOf("version" to project.version))
+        }
+    }
+
+    jar {
+        from(rootDir.resolve("LICENSE.md"))
+    }
+}
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            artifactId = base.archivesName.get()
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        maven("file://${System.getenv("local_maven")}")
     }
 }

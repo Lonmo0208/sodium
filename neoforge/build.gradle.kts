@@ -1,142 +1,216 @@
 plugins {
-    id("multiloader-platform")
-
-    id("net.neoforged.moddev") version("2.0.42-beta")
+    id("idea")
+    id("maven-publish")
+    id("net.minecraftforge.gradle") version "[6.0,6.2)"
+    id("java-library")
+    id("org.spongepowered.mixin") version "0.7-SNAPSHOT"
 }
 
 base {
-    archivesName = "sodium-neoforge"
+    archivesName = "sodium-forge-1.20.1"
+}
+
+val MINECRAFT_VERSION: String by rootProject.extra
+val NEOFORGE_VERSION: String by rootProject.extra
+val MOD_VERSION: String by rootProject.extra
+
+jarJar.enable()
+
+mixin {
+    add(sourceSets.main.get(), "sodium.refmap.json")
+    add(project(":common").sourceSets.main.get(), "sodium.refmap.json")
+    config("sodium.mixins.json")
+    config("sodium-forge.mixins.json")
+}
+
+sourceSets {
+    val service = create("service")
+
+
+    service.apply {
+        compileClasspath += main.get().compileClasspath
+        compileClasspath += project(":common").sourceSets.getByName("workarounds").output
+    }
+
+    main.get().apply {
+        compileClasspath += project(":common").sourceSets.getByName("workarounds").output
+    }
+
+    test.get().apply {
+        compileClasspath += main.get().compileClasspath
+        compileClasspath += project(":common").sourceSets.getByName("workarounds").output
+    }
 }
 
 repositories {
-    maven("https://maven.pkg.github.com/ims212/ForgifiedFabricAPI") {
-        credentials {
-            username = "IMS212"
-            // Read only token
-            password = "ghp_" + "DEuGv0Z56vnSOYKLCXdsS9svK4nb9K39C1Hn"
+    maven("https://maven.fabricmc.net")
+    maven("https://maven.tterrag.com/")
+    maven("https://maven.blamejared.com")
+    maven("https://api.modrinth.com/maven") {
+        content {
+            includeGroup("maven.modrinth")
+        }
+    }
+    maven("https://cursemaven.com") {
+        content {
+            includeGroup("curse.maven")
+        }
+    }
+    maven("https://maven.covers1624.net/")
+    mavenCentral()
+
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = uri("https://api.modrinth.com/maven")
+            }
+        }
+        forRepositories(fg.repository) // Only add this if you're using ForgeGradle, otherwise remove this line
+        filter {
+            includeGroup("maven.modrinth")
         }
     }
 
-    maven("https://maven.su5ed.dev/releases")
-    maven("https://maven.neoforged.net/releases/")
-}
-
-sourceSets {
-    create("service")
-}
-
-val configurationCommonModJava: Configuration = configurations.create("commonModJava") {
-    isCanBeResolved = true
-}
-val configurationCommonModResources: Configuration = configurations.create("commonModResources") {
-    isCanBeResolved = true
-}
-
-val configurationCommonServiceJava: Configuration = configurations.create("commonServiceJava") {
-    isCanBeResolved = true
-}
-val configurationCommonServiceResources: Configuration = configurations.create("commonServiceResources") {
-    isCanBeResolved = true
-}
-
-dependencies {
-    configurationCommonModJava(project(path = ":common", configuration = "commonMainJava"))
-    configurationCommonModJava(project(path = ":common", configuration = "commonApiJava"))
-    configurationCommonServiceJava(project(path = ":common", configuration = "commonEarlyLaunchJava"))
-
-    configurationCommonModResources(project(path = ":common", configuration = "commonMainResources"))
-    configurationCommonModResources(project(path = ":common", configuration = "commonApiResources"))
-    configurationCommonServiceResources(project(path = ":common", configuration = "commonEarlyLaunchResources"))
-
-    fun addEmbeddedFabricModule(dependency: String) {
-        dependencies.implementation(dependency)
-        dependencies.jarJar(dependency)
-    }
-
-    addEmbeddedFabricModule("org.sinytra.forgified-fabric-api:fabric-api-base:0.4.42+d1308ded19")
-    addEmbeddedFabricModule("org.sinytra.forgified-fabric-api:fabric-renderer-api-v1:5.0.0+babc52e504")
-    addEmbeddedFabricModule("org.sinytra.forgified-fabric-api:fabric-rendering-data-attachment-v1:0.3.48+73761d2e19")
-    addEmbeddedFabricModule("org.sinytra.forgified-fabric-api:fabric-block-view-api-v2:1.0.10+9afaaf8c19")
-
-    jarJar(project(":neoforge", "service"))
-}
-
-val serviceJar = tasks.create<Jar>("serviceJar") {
-    from(configurationCommonServiceJava)
-    from(configurationCommonServiceResources)
-
-    from(sourceSets["service"].output)
-
-    from(rootDir.resolve("LICENSE.md"))
-
-    manifest.attributes["FMLModType"] = "LIBRARY"
-
-    archiveClassifier = "service"
-}
-
-val configurationService: Configuration = configurations.create("service") {
-    isCanBeConsumed = true
-    isCanBeResolved = true
-
-    outgoing {
-        artifact(serviceJar)
-    }
-}
-
-sourceSets {
-    named("service") {
-        compileClasspath = sourceSets["main"].compileClasspath
-        runtimeClasspath = sourceSets["main"].runtimeClasspath
-
-        compileClasspath += configurationCommonServiceJava
-        runtimeClasspath += configurationCommonServiceJava
-    }
-
-    main {
-        compileClasspath += configurationCommonModJava
-        runtimeClasspath += configurationCommonModJava
-    }
-}
-
-neoForge {
-    version = BuildConfig.NEOFORGE_VERSION
-
-    if (BuildConfig.PARCHMENT_VERSION != null) {
-        parchment {
-            minecraftVersion = BuildConfig.MINECRAFT_VERSION
-            mappingsVersion = BuildConfig.PARCHMENT_VERSION
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = uri("https://maven.pkg.github.com/ims212/forge-frapi")
+                credentials {
+                    username = "IMS212"
+                    // Read only token
+                    password = "ghp_" + "DEuGv0Z56vnSOYKLCXdsS9svK4nb9K39C1Hn"
+                }
+            }
         }
+        filter {
+            includeGroup("me.jellysquid.lts")
+        }
+    }
+    maven { url = uri("https://maven.fabricmc.net/") }
+    maven { url = uri("https://maven.architectury.dev/") }
+    maven { url = uri("https://files.minecraftforge.net/maven/") }
+    maven { url = uri("https://maven.neoforged.net/releases/") }
+    maven { url = uri("https://maven.su5ed.dev/releases") }
+    mavenLocal()
+    maven("https://repo.spongepowered.org/repository/maven-public/") { name = "Sponge Snapshots" }
+
+}
+
+minecraft {
+    mappings("official", "1.20.1")
+    copyIdeResources = true //Calls processResources when in dev
+
+    val transformerFile = file("src/main/resources/META-INF/accesstransformer.cfg")
+    if (transformerFile.exists()) {
+        accessTransformer(transformerFile)
     }
 
     runs {
-        create("Client") {
-            client()
-            ideName = "NeoForge/Client"
+        create("client") {
+            workingDirectory(project.file("run"))
+            ideaModule("${rootProject.name}.${project.name}.main")
+            property("mixin.env.remapRefMap", "true")
+            property("mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg")
+            mods {
+                create("modRun") {
+                    source(sourceSets.main.get())
+                    source(project(":common").sourceSets.main.get())
+                }
+            }
+        }
+
+        create("data") {
+            //programArguments.addAll("--mod", "sodium", "--all", "--output", file("src/generated/resources/").getAbsolutePath(), "--existing", file("src/main/resources/").getAbsolutePath())
         }
     }
+}
+dependencies {
+    implementation("net.fabricmc:mapping-io:0.6.1")
+    implementation("net.fabricmc:mapping-io-extras:0.6.1")
+    implementation("com.google.guava:guava:33.1.0-jre")
+    implementation("org.ow2.asm:asm:9.6")
+    implementation("org.ow2.asm:asm-tree:9.6")
+    implementation("org.ow2.asm:asm-commons:9.6")
+    implementation("com.google.code.gson:gson:2.10.1")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.10.0.202406032230-r")
+    minecraft("net.minecraftforge:forge:${MINECRAFT_VERSION}-${NEOFORGE_VERSION}")
+    compileOnly(project(":common", "namedElements"))
+    annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
-    mods {
-        create("sodium") {
-            sourceSet(sourceSets["main"])
-            sourceSet(project(":common").sourceSets["main"])
-            sourceSet(project(":common").sourceSets["api"])
-        }
-
-        create("sodium-service") {
-            sourceSet(sourceSets["service"])
-            sourceSet(project(":common").sourceSets["workarounds"])
-        }
+    compileOnly("io.github.llamalad7:mixinextras-common:0.3.5")
+    annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5")
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.3.5")) {
+        jarJar.ranged(this, "[0.3.5,)")
     }
+    implementation(fg.deobf("dev.su5ed.sinytra.fabric-api:fabric-api-base:0.4.31+ef105b4977"))
+    jarJar("dev.su5ed.sinytra.fabric-api:fabric-api-base:[0.4.30,0.4.32)") {
+        isTransitive = false
+        jarJar.pin(this, "0.4.31+ef105b4977")
+    }
+    implementation(fg.deobf("dev.su5ed.sinytra.fabric-api:fabric-renderer-api-v1:3.2.1+1d29b44577"))
+    jarJar("dev.su5ed.sinytra.fabric-api:fabric-renderer-api-v1:[3.2.1,3.2.2)"){
+        isTransitive = false
+    }
+    implementation(fg.deobf("dev.su5ed.sinytra.fabric-api:fabric-rendering-data-attachment-v1:0.3.37+a6081afc77"))
+    jarJar("dev.su5ed.sinytra.fabric-api:fabric-rendering-data-attachment-v1:[0.3.36,0.3.38)"){
+        isTransitive = false
+        jarJar.pin(this, "0.3.37+a6081afc77")
+    }
+    minecraftLibrary("com.lodborg:interval-tree:1.0.0")
+    jarJar("com.lodborg:interval-tree:[1.0.0,1.0.1)")
+    implementation(fg.deobf("dev.su5ed.sinytra.fabric-api:fabric-block-view-api-v2:1.0.1+0767707077"))
+    jarJar("dev.su5ed.sinytra.fabric-api:fabric-block-view-api-v2:[1.0.1,1.0.2)") {
+        isTransitive = false
+        jarJar.pin(this, "1.0.1+0767707077")
+    }
+}
+tasks.jarJar {
+    dependsOn("reobfJar")
+    archiveClassifier = ""
+}
+
+tasks.jar {
+    archiveClassifier = "std"
+}
+
+val notNeoTask: (Task) -> Boolean = { it: Task ->
+    !it.name.startsWith("compileService")
 }
 
 tasks {
-    jar {
-        from(configurationCommonModJava)
-        destinationDirectory.set(file(rootProject.layout.buildDirectory).resolve("mods"))
+    withType<JavaCompile>().matching(notNeoTask).configureEach {
+        source(project(":common").sourceSets.main.get().allSource)
+        source(project(":common").sourceSets.getByName("api").allSource)
+        source(project(":common").sourceSets.getByName("workarounds").allSource)
     }
 
-    processResources {
-        from(configurationCommonModResources)
+    javadoc { source(project(":common").sourceSets.main.get().allJava) }
+
+    processResources { from(project(":common").sourceSets.main.get().resources) }
+
+    jar { finalizedBy("reobfJar") }
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication::class) {
+            artifactId = base.archivesName.get()
+            artifact(tasks.jar)
+            fg.component(this)
+        }
+    }
+
+    repositories {
+        maven("file://${System.getenv("local_maven")}")
     }
 }
 
+
+sourceSets.forEach {
+    val dir = layout.buildDirectory.dir("sourceSets/${it.name}")
+    it.output.setResourcesDir(dir)
+    it.java.destinationDirectory.set(dir)
+}

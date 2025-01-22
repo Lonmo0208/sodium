@@ -1,0 +1,22 @@
+modLoader = "javafml"
+loaderVersion = "*"
+license = "Polyform-Shield-1.0"
+
+[[mods]]
+modId = "sodium"
+
+version = "${version}"
+displayName = "Sodium"
+
+logoFile="sodium-icon.png" #optional
+
+authors="JellySquid"
+
+description = '''
+Sodium is a powerful rendering engine for Minecraft which improves frame rates and reduces lag spikes.
+'''
+
+provides = ["indium"]
+
+[modproperties.sodium]
+"fabric-renderer-api-v1:contains_renderer"=true
