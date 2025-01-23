@@ -1,5 +1,6 @@
 package me.jellysquid.mods.sodium.client.compatibility.environment.probe;
 
+import net.minecraft.Util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import oshi.SystemInfo;
@@ -11,8 +12,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import net.minecraft.Util;
 
 public class GraphicsAdapterProbe {
     private static final Logger LOGGER = LoggerFactory.getLogger("Sodium-GraphicsAdapterProbe");

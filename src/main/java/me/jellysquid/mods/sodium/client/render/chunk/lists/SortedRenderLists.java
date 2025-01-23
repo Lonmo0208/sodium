@@ -2,8 +2,8 @@ package me.jellysquid.mods.sodium.client.render.chunk.lists;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
-import me.jellysquid.mods.sodium.client.util.iterator.ReversibleObjectArrayIterator;
 import me.jellysquid.mods.sodium.client.render.chunk.region.RenderRegion;
+import me.jellysquid.mods.sodium.client.util.iterator.ReversibleObjectArrayIterator;
 
 public class SortedRenderLists implements ChunkRenderListIterable {
     private static final SortedRenderLists EMPTY = new SortedRenderLists(ObjectArrayList.of());

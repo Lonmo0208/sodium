@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.model.light.data;
 import me.jellysquid.mods.sodium.client.world.LevelSlice;
 import net.minecraft.core.SectionPos;
 import net.minecraft.world.level.BlockAndTintGetter;
+
 import java.util.Arrays;
 
 /**

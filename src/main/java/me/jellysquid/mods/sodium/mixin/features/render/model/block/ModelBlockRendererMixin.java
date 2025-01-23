@@ -1,5 +1,7 @@
 package me.jellysquid.mods.sodium.mixin.features.render.model.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import me.jellysquid.mods.sodium.client.model.quad.BakedQuadView;
 import me.jellysquid.mods.sodium.client.render.immediate.model.BakedModelEncoder;
 import me.jellysquid.mods.sodium.client.render.texture.SpriteUtil;
@@ -20,8 +22,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+
 import java.util.List;
 
 @Mixin(ModelBlockRenderer.class)

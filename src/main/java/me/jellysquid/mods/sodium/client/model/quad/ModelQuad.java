@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.client.model.quad;
 
-import static me.jellysquid.mods.sodium.client.util.ModelQuadUtil.*;
-
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
+
+import static me.jellysquid.mods.sodium.client.util.ModelQuadUtil.*;
 
 /**
  * A simple implementation of the {@link ModelQuadViewMutable} interface which can provide an on-heap scratch area

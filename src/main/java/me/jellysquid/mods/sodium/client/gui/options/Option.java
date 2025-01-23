@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.gui.options;
 import me.jellysquid.mods.sodium.client.gui.options.control.Control;
 import me.jellysquid.mods.sodium.client.gui.options.storage.OptionStorage;
 import net.minecraft.network.chat.Component;
+
 import java.util.Collection;
 
 public interface Option<T> {

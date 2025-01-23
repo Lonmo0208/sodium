@@ -1,14 +1,14 @@
 package me.jellysquid.mods.sodium.mixin.features.world.storage;
 
+import net.minecraft.client.multiplayer.ClientChunkCache;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.concurrent.atomic.AtomicReferenceArray;
-import net.minecraft.client.multiplayer.ClientChunkCache;
-import net.minecraft.util.Mth;
-import net.minecraft.world.level.chunk.LevelChunk;
 
 @Mixin(targets = "net/minecraft/client/multiplayer/ClientChunkCache$Storage")
 public class ClientChunkCacheMixin {

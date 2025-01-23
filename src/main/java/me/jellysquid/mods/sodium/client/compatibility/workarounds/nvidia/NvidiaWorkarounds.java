@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.client.compatibility.workarounds.nvidia;
 
 import me.jellysquid.mods.sodium.client.platform.unix.Libc;
+import me.jellysquid.mods.sodium.client.platform.windows.WindowsCommandLine;
 import me.jellysquid.mods.sodium.client.platform.windows.api.Kernel32;
 import net.minecraft.Util;
-import me.jellysquid.mods.sodium.client.platform.windows.WindowsCommandLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,7 +1,5 @@
 package net.caffeinemc.mods.sodium.desktop.utils.browse;
 
-import net.caffeinemc.mods.sodium.desktop.utils.browse.BrowseUrlHandler;
-
 import java.io.IOException;
 import java.util.Locale;
 

@@ -1,8 +1,9 @@
 package me.jellysquid.mods.sodium.client.util.color;
 
-import java.util.function.Function;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.function.Function;
 
 public class FastCubicSampler {
     private static final double[] DENSITY_CURVE = new double[] { 0.0D, 1.0D, 4.0D, 6.0D, 4.0D, 1.0D, 0.0D };

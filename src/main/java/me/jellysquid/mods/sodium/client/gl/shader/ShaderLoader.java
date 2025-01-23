@@ -1,11 +1,11 @@
 package me.jellysquid.mods.sodium.client.gl.shader;
 
+import net.minecraft.resources.ResourceLocation;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import net.minecraft.resources.ResourceLocation;
 
 public class ShaderLoader {
     /**

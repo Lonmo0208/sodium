@@ -1,14 +1,15 @@
 package me.jellysquid.mods.sodium.client.platform;
 
+import com.mojang.blaze3d.platform.Window;
+import me.jellysquid.mods.sodium.client.platform.windows.api.User32;
+import me.jellysquid.mods.sodium.client.platform.windows.api.msgbox.MsgBoxCallback;
 import me.jellysquid.mods.sodium.client.platform.windows.api.msgbox.MsgBoxParamSw;
 import net.minecraft.Util;
-import me.jellysquid.mods.sodium.client.platform.windows.api.msgbox.MsgBoxCallback;
-import me.jellysquid.mods.sodium.client.platform.windows.api.User32;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFWNativeWin32;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
-import com.mojang.blaze3d.platform.Window;
+
 import java.nio.ByteBuffer;
 import java.util.Objects;
 

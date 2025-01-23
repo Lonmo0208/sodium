@@ -1,5 +1,6 @@
 package me.jellysquid.mods.sodium.client.gl.device;
 
+import com.mojang.blaze3d.vertex.BufferUploader;
 import me.jellysquid.mods.sodium.client.gl.array.GlVertexArray;
 import me.jellysquid.mods.sodium.client.gl.buffer.*;
 import me.jellysquid.mods.sodium.client.gl.functions.DeviceFunctions;
@@ -8,7 +9,7 @@ import me.jellysquid.mods.sodium.client.gl.sync.GlFence;
 import me.jellysquid.mods.sodium.client.gl.tessellation.*;
 import me.jellysquid.mods.sodium.client.gl.util.EnumBitField;
 import org.lwjgl.opengl.*;
-import com.mojang.blaze3d.vertex.BufferUploader;
+
 import java.nio.ByteBuffer;
 
 public class GLRenderDevice implements RenderDevice {

@@ -3,6 +3,7 @@ package me.jellysquid.mods.sodium.client.platform.windows.api;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.*;
+
 import java.nio.ByteBuffer;
 
 public class Kernel32 {

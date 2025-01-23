@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.mixin.features.render.particle;
 
-import net.caffeinemc.mods.sodium.api.vertex.format.common.ParticleVertex;
-import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.caffeinemc.mods.sodium.api.util.ColorABGR;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.common.ParticleVertex;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.Particle;

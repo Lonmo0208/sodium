@@ -1,5 +1,7 @@
 package me.jellysquid.mods.sodium.client.gl.shader;
 
+import net.minecraft.resources.ResourceLocation;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
@@ -7,7 +9,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.minecraft.resources.ResourceLocation;
 
 public class ShaderParser {
     public static String parseShader(String src, ShaderConstants constants) {

@@ -2,8 +2,9 @@ package me.jellysquid.mods.sodium.client.compatibility.checks;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import java.util.List;
 import net.minecraft.server.packs.metadata.MetadataSectionType;
+
+import java.util.List;
 
 /**
  * Reads additional metadata for Sodium from a resource pack's `pack.mcmeta` file. This allows the

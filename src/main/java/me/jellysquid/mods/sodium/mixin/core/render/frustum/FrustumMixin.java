@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.mixin.core.render.frustum;
 
-import me.jellysquid.mods.sodium.client.render.viewport.frustum.SimpleFrustum;
-import net.minecraft.client.renderer.culling.Frustum;
 import me.jellysquid.mods.sodium.client.render.viewport.Viewport;
 import me.jellysquid.mods.sodium.client.render.viewport.ViewportProvider;
+import me.jellysquid.mods.sodium.client.render.viewport.frustum.SimpleFrustum;
+import net.minecraft.client.renderer.culling.Frustum;
 import org.joml.FrustumIntersection;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Final;

@@ -1,11 +1,11 @@
 package me.jellysquid.mods.sodium.client.compatibility.checks;
 
+import me.jellysquid.mods.sodium.client.compatibility.environment.GLContextInfo;
 import me.jellysquid.mods.sodium.client.compatibility.workarounds.nvidia.NvidiaDriverVersion;
 import me.jellysquid.mods.sodium.client.gui.console.Console;
 import me.jellysquid.mods.sodium.client.gui.console.message.MessageLevel;
 import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
-import me.jellysquid.mods.sodium.client.compatibility.environment.GLContextInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

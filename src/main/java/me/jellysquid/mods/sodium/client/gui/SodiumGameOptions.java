@@ -9,6 +9,7 @@ import me.jellysquid.mods.sodium.client.util.FileUtil;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.GraphicsStatus;
 import net.minecraft.network.chat.Component;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Modifier;

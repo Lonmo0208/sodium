@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.client.compatibility.checks;
 
+import me.jellysquid.mods.sodium.client.compatibility.environment.probe.GraphicsAdapterProbe;
+import me.jellysquid.mods.sodium.client.compatibility.environment.probe.GraphicsAdapterVendor;
 import me.jellysquid.mods.sodium.client.platform.MessageBox;
 import me.jellysquid.mods.sodium.client.platform.windows.WindowsDriverStoreVersion;
 import net.minecraft.Util;
-import me.jellysquid.mods.sodium.client.compatibility.environment.probe.GraphicsAdapterProbe;
-import me.jellysquid.mods.sodium.client.compatibility.environment.probe.GraphicsAdapterVendor;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

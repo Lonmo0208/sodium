@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.client.render.chunk.compile;
 
+import me.jellysquid.mods.sodium.client.render.chunk.compile.pipeline.BlockRenderCache;
 import me.jellysquid.mods.sodium.client.render.chunk.vertex.format.ChunkVertexType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import me.jellysquid.mods.sodium.client.render.chunk.compile.pipeline.BlockRenderCache;
 
 public class ChunkBuildContext {
     public final ChunkBuildBuffers buffers;

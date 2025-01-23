@@ -1,5 +1,6 @@
 package me.jellysquid.mods.sodium.mixin.features.textures.animations.upload;
 
+import com.mojang.blaze3d.platform.NativeImage;
 import me.jellysquid.mods.sodium.client.util.NativeImageHelper;
 import me.jellysquid.mods.sodium.mixin.features.textures.SpriteContentsInvoker;
 import net.caffeinemc.mods.sodium.api.util.ColorMixer;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.mojang.blaze3d.platform.NativeImage;
+
 import java.util.List;
 
 @Mixin(SpriteContents.InterpolationData.class)

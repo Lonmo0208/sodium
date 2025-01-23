@@ -1,5 +1,8 @@
 package me.jellysquid.mods.sodium.mixin.core.render.immediate.consumer;
 
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultedVertexConsumer;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import me.jellysquid.mods.sodium.client.render.vertex.buffer.BufferBuilderExtension;
 import me.jellysquid.mods.sodium.client.render.vertex.buffer.DirectBufferBuilder;
 import net.caffeinemc.mods.sodium.api.memory.MemoryIntrinsics;
@@ -16,9 +19,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultedVertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
+
 import java.nio.ByteBuffer;
 
 @Mixin(BufferBuilder.class)

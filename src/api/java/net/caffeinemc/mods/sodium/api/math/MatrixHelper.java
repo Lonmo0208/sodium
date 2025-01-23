@@ -8,8 +8,6 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
-import java.util.Objects;
-
 /**
  * Implements optimized utilities for transforming vectors with a given matrix.
  *

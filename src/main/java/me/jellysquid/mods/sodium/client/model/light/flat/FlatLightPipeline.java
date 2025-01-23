@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+
 import java.util.Arrays;
 
 import static me.jellysquid.mods.sodium.client.model.light.data.LightDataAccess.*;

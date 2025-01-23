@@ -2,10 +2,10 @@ package me.jellysquid.mods.sodium.client.render.chunk.lists;
 
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSectionFlags;
+import me.jellysquid.mods.sodium.client.render.chunk.region.RenderRegion;
+import me.jellysquid.mods.sodium.client.util.iterator.ByteArrayIterator;
 import me.jellysquid.mods.sodium.client.util.iterator.ByteIterator;
 import me.jellysquid.mods.sodium.client.util.iterator.ReversibleByteArrayIterator;
-import me.jellysquid.mods.sodium.client.util.iterator.ByteArrayIterator;
-import me.jellysquid.mods.sodium.client.render.chunk.region.RenderRegion;
 import org.jetbrains.annotations.Nullable;
 
 public class ChunkRenderList {

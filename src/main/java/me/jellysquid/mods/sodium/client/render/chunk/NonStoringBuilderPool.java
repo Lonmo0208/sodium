@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.client.render.chunk;
 
+import net.minecraft.client.renderer.SectionBufferBuilderPack;
+import net.minecraft.client.renderer.SectionBufferBuilderPool;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import net.minecraft.client.renderer.SectionBufferBuilderPack;
-import net.minecraft.client.renderer.SectionBufferBuilderPool;
 
 public class NonStoringBuilderPool extends SectionBufferBuilderPool {
     public NonStoringBuilderPool() {

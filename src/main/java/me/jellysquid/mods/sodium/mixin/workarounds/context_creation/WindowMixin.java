@@ -1,11 +1,11 @@
 package me.jellysquid.mods.sodium.mixin.workarounds.context_creation;
 
-import me.jellysquid.mods.sodium.client.compatibility.checks.ModuleScanner;
 import com.mojang.blaze3d.platform.DisplayData;
 import com.mojang.blaze3d.platform.ScreenManager;
 import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.platform.WindowEventHandler;
 import me.jellysquid.mods.sodium.client.compatibility.checks.LateDriverScanner;
+import me.jellysquid.mods.sodium.client.compatibility.checks.ModuleScanner;
 import me.jellysquid.mods.sodium.client.compatibility.workarounds.Workarounds;
 import me.jellysquid.mods.sodium.client.compatibility.workarounds.nvidia.NvidiaWorkarounds;
 import net.minecraft.Util;

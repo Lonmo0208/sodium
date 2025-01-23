@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.client.world;
 
 import it.unimi.dsi.fastutil.ints.Int2ReferenceMap;
-import me.jellysquid.mods.sodium.client.world.biome.LevelColorCache;
 import me.jellysquid.mods.sodium.client.world.biome.BiomeColorSource;
 import me.jellysquid.mods.sodium.client.world.biome.BiomeColorView;
 import me.jellysquid.mods.sodium.client.world.biome.LevelBiomeSlice;
+import me.jellysquid.mods.sodium.client.world.biome.LevelColorCache;
 import me.jellysquid.mods.sodium.client.world.cloned.ChunkRenderContext;
 import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSection;
 import me.jellysquid.mods.sodium.client.world.cloned.ClonedChunkSectionCache;

@@ -4,6 +4,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.terrain.material.Material;
 import me.jellysquid.mods.sodium.client.render.chunk.vertex.format.ChunkVertexEncoder;
 import me.jellysquid.mods.sodium.client.render.chunk.vertex.format.ChunkVertexType;
 import org.lwjgl.system.MemoryUtil;
+
 import java.nio.ByteBuffer;
 
 public class ChunkMeshBufferBuilder {

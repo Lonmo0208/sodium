@@ -6,7 +6,10 @@ import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
 import me.jellysquid.mods.sodium.client.render.chunk.region.RenderRegion;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Queue;
 
 public class VisibleChunkCollector implements OcclusionCuller.Visitor {
     private final ObjectArrayList<ChunkRenderList> sortedRenderLists;
