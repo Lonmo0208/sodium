@@ -5,7 +5,7 @@ license = "Polyform-Shield-1.0"
 [[mods]]
 modId = "sodium"
 
-version = "${version}"
+version = "0.6.0+mc1.20.1"
 displayName = "Sodium"
 
 logoFile="sodium-icon.png" #optional

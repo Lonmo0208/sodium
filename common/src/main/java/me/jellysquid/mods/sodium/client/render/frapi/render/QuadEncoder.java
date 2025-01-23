@@ -1,13 +1,13 @@
 package me.jellysquid.mods.sodium.client.render.frapi.render;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import me.jellysquid.mods.sodium.api.math.MatrixHelper;
-import me.jellysquid.mods.sodium.api.util.ColorARGB;
-import me.jellysquid.mods.sodium.api.util.NormI8;
-import me.jellysquid.mods.sodium.api.vertex.buffer.VertexBufferWriter;
-import me.jellysquid.mods.sodium.api.vertex.format.common.ModelVertex;
 import me.jellysquid.mods.sodium.client.render.frapi.mesh.MutableQuadViewImpl;
 import me.jellysquid.mods.sodium.client.render.vertex.VertexConsumerUtils;
+import net.caffeinemc.mods.sodium.api.math.MatrixHelper;
+import net.caffeinemc.mods.sodium.api.util.ColorARGB;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.common.ModelVertex;
 import org.joml.Math;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;

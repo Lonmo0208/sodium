@@ -103,6 +103,6 @@ tasks {
         from(api.output.classesDirs)
         from(api.output.resourcesDir)
 
-        manifest.attributes["Main-Class"] = "me.jellysquid.mods.sodium.desktop.LaunchWarn"
+        manifest.attributes["Main-Class"] = "net.caffeinemc.mods.sodium.desktop.LaunchWarn"
     }
 }

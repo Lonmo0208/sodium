@@ -3,13 +3,13 @@ package me.jellysquid.mods.sodium.mixin.core.render.immediate.consumer;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultedVertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import me.jellysquid.mods.sodium.api.memory.MemoryIntrinsics;
-import me.jellysquid.mods.sodium.api.vertex.buffer.VertexBufferWriter;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatDescription;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatRegistry;
-import me.jellysquid.mods.sodium.api.vertex.serializer.VertexSerializerRegistry;
-import me.jellysquid.mods.sodium.client.render.vertex.buffer.BufferBuilderExtension;
-import me.jellysquid.mods.sodium.client.render.vertex.buffer.DirectBufferBuilder;
+import me.jellysquid.mods.sodium.client.render.vertex.buffer.ExtendedBufferBuilder;
+import me.jellysquid.mods.sodium.client.render.vertex.buffer.SodiumBufferBuilder;
+import net.caffeinemc.mods.sodium.api.memory.MemoryIntrinsics;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatRegistry;
+import net.caffeinemc.mods.sodium.api.vertex.serializer.VertexSerializerRegistry;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 import org.objectweb.asm.Opcodes;
@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.nio.ByteBuffer;
 
 @Mixin(BufferBuilder.class)
-public abstract class BufferBuilderMixin extends DefaultedVertexConsumer implements VertexBufferWriter, BufferBuilderExtension {
+public abstract class BufferBuilderMixin extends DefaultedVertexConsumer implements VertexBufferWriter, ExtendedBufferBuilder {
     @Shadow
     protected abstract void ensureCapacity(int size);
 
@@ -45,7 +45,7 @@ public abstract class BufferBuilderMixin extends DefaultedVertexConsumer impleme
     @Unique
     private int vertexStride;
 
-    private DirectBufferBuilder directBufferBuilder;
+    private SodiumBufferBuilder SodiumBufferBuilder;
 
     @Inject(
             method = "switchFormat",
@@ -59,13 +59,13 @@ public abstract class BufferBuilderMixin extends DefaultedVertexConsumer impleme
         this.formatDescription = VertexFormatRegistry.instance()
                 .get(format);
         this.vertexStride = this.formatDescription.stride();
-        this.directBufferBuilder = this.formatDescription.isSimpleFormat() ? new DirectBufferBuilder(this) : null;
+        this.SodiumBufferBuilder = this.formatDescription.isSimpleFormat() ? new SodiumBufferBuilder(this) : null;
     }
 
     @Inject(method = { "discard", "reset", "begin" }, at = @At("RETURN"))
     private void resetDelegate(CallbackInfo ci) {
-        if (this.directBufferBuilder != null) {
-            this.directBufferBuilder.reset();
+        if (this.SodiumBufferBuilder != null) {
+            this.SodiumBufferBuilder.reset();
         }
     }
 
@@ -85,8 +85,8 @@ public abstract class BufferBuilderMixin extends DefaultedVertexConsumer impleme
     }
 
     @Override
-    public DirectBufferBuilder sodium$getDelegate() {
-        return this.directBufferBuilder;
+    public SodiumBufferBuilder sodium$getDelegate() {
+        return this.SodiumBufferBuilder;
     }
 
     @Override

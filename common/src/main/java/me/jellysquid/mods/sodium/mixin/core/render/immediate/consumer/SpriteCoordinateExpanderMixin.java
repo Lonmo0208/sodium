@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.mixin.core.render.immediate.consumer;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import me.jellysquid.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
-import me.jellysquid.mods.sodium.api.vertex.attributes.common.TextureAttribute;
-import me.jellysquid.mods.sodium.api.vertex.buffer.VertexBufferWriter;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatDescription;
+import net.caffeinemc.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
+import net.caffeinemc.mods.sodium.api.vertex.attributes.common.TextureAttribute;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
 import net.minecraft.client.renderer.SpriteCoordinateExpander;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import org.lwjgl.system.MemoryStack;

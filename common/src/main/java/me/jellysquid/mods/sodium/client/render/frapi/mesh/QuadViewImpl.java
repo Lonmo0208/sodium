@@ -17,7 +17,6 @@
 package me.jellysquid.mods.sodium.client.render.frapi.mesh;
 
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
@@ -25,6 +24,7 @@ import me.jellysquid.mods.sodium.client.render.frapi.helper.ColorHelper;
 import me.jellysquid.mods.sodium.client.render.frapi.helper.GeometryHelper;
 import me.jellysquid.mods.sodium.client.render.frapi.helper.NormalHelper;
 import me.jellysquid.mods.sodium.client.render.frapi.material.RenderMaterialImpl;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadView;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;

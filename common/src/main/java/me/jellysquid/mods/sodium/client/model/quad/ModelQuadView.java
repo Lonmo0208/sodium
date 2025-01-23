@@ -1,7 +1,7 @@
 package me.jellysquid.mods.sodium.client.model.quad;
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFlags;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 

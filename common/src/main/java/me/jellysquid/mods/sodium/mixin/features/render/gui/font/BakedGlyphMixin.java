@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.mixin.features.render.gui.font;
 
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import me.jellysquid.mods.sodium.api.math.MatrixHelper;
-import me.jellysquid.mods.sodium.api.util.ColorABGR;
-import me.jellysquid.mods.sodium.api.vertex.format.common.GlyphVertex;
 import me.jellysquid.mods.sodium.client.render.vertex.VertexConsumerUtils;
+import net.caffeinemc.mods.sodium.api.math.MatrixHelper;
+import net.caffeinemc.mods.sodium.api.util.ColorABGR;
+import net.caffeinemc.mods.sodium.api.vertex.format.common.GlyphVertex;
 import net.minecraft.client.gui.font.glyphs.BakedGlyph;
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryStack;

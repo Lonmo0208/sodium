@@ -2,9 +2,9 @@ package me.jellysquid.mods.sodium.client.render.vertex;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
-import me.jellysquid.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatDescription;
 import me.jellysquid.mods.sodium.mixin.core.render.VertexFormatAccessor;
+import net.caffeinemc.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
 
 import java.util.Arrays;
 import java.util.EnumSet;

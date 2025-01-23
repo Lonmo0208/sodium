@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.neoforge.block;
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.services.PlatformBlockAccess;
 import me.jellysquid.mods.sodium.client.util.DirectionUtil;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.BakedModel;

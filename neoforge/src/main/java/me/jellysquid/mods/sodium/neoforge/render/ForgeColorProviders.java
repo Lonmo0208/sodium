@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.neoforge.render;
 
-import me.jellysquid.mods.sodium.api.util.ColorARGB;
 import me.jellysquid.mods.sodium.client.model.color.ColorProvider;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.world.LevelSlice;
+import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;

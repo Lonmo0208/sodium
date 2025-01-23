@@ -1,6 +1,5 @@
 package me.jellysquid.mods.sodium.client.render.chunk.compile.pipeline;
 
-import me.jellysquid.mods.sodium.api.util.ColorARGB;
 import me.jellysquid.mods.sodium.client.model.color.ColorProvider;
 import me.jellysquid.mods.sodium.client.model.color.ColorProviderRegistry;
 import me.jellysquid.mods.sodium.client.model.light.LightMode;
@@ -21,6 +20,7 @@ import me.jellysquid.mods.sodium.client.services.PlatformModelAccess;
 import me.jellysquid.mods.sodium.client.services.PlatformTextureAccess;
 import me.jellysquid.mods.sodium.client.services.SodiumModelData;
 import me.jellysquid.mods.sodium.client.world.LevelSlice;
+import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.fabricmc.fabric.api.renderer.v1.material.BlendMode;
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
 import net.fabricmc.fabric.api.renderer.v1.model.FabricBakedModel;

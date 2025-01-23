@@ -1,8 +1,8 @@
 package me.jellysquid.mods.sodium.client.render.vertex.serializers.generated;
 
-import me.jellysquid.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatDescription;
-import me.jellysquid.mods.sodium.api.vertex.serializer.VertexSerializer;
+import net.caffeinemc.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
+import net.caffeinemc.mods.sodium.api.vertex.serializer.VertexSerializer;
 import org.lwjgl.system.MemoryUtil;
 import org.objectweb.asm.*;
 

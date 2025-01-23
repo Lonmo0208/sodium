@@ -16,12 +16,12 @@
 
 package me.jellysquid.mods.sodium.client.render.frapi.mesh;
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.BakedQuadView;
 import me.jellysquid.mods.sodium.client.render.frapi.SodiumRenderer;
 import me.jellysquid.mods.sodium.client.render.frapi.helper.ColorHelper;
 import me.jellysquid.mods.sodium.client.render.frapi.helper.TextureHelper;
 import me.jellysquid.mods.sodium.client.render.frapi.material.RenderMaterialImpl;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.fabricmc.fabric.api.renderer.v1.material.RenderMaterial;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadEmitter;
 import net.fabricmc.fabric.api.renderer.v1.mesh.QuadView;

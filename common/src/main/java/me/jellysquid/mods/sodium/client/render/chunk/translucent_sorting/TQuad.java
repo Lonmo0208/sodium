@@ -1,7 +1,7 @@
 package me.jellysquid.mods.sodium.client.render.chunk.translucent_sorting;
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
 

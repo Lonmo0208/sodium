@@ -1,6 +1,6 @@
 package me.jellysquid.mods.sodium.client.util.color;
 
-import me.jellysquid.mods.sodium.api.util.ColorARGB;
+import net.caffeinemc.mods.sodium.api.util.ColorARGB;
 import net.minecraft.util.Mth;
 
 public class BoxBlur {

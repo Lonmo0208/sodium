@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.client.render.immediate.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import me.jellysquid.mods.sodium.api.math.MatrixHelper;
-import me.jellysquid.mods.sodium.api.vertex.buffer.VertexBufferWriter;
-import me.jellysquid.mods.sodium.api.vertex.format.common.ModelVertex;
+import net.caffeinemc.mods.sodium.api.math.MatrixHelper;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.common.ModelVertex;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.core.Direction;
 import org.apache.commons.lang3.ArrayUtils;

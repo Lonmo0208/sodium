@@ -2,11 +2,11 @@ package me.jellysquid.mods.sodium.mixin.features.render.gui.outlines;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import me.jellysquid.mods.sodium.api.util.ColorABGR;
-import me.jellysquid.mods.sodium.api.util.NormI8;
-import me.jellysquid.mods.sodium.api.vertex.buffer.VertexBufferWriter;
-import me.jellysquid.mods.sodium.api.vertex.format.common.LineVertex;
 import me.jellysquid.mods.sodium.client.render.vertex.VertexConsumerUtils;
+import net.caffeinemc.mods.sodium.api.util.ColorABGR;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
+import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
+import net.caffeinemc.mods.sodium.api.vertex.format.common.LineVertex;
 import net.minecraft.client.renderer.LevelRenderer;
 import org.joml.Math;
 import org.joml.Matrix3f;

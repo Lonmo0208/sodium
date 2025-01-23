@@ -1,10 +1,10 @@
 package me.jellysquid.mods.sodium.client.gui.console;
 
-import me.jellysquid.mods.sodium.api.util.ColorARGB;
-import me.jellysquid.mods.sodium.api.util.ColorU8;
 import me.jellysquid.mods.sodium.client.console.Console;
 import me.jellysquid.mods.sodium.client.console.message.Message;
 import me.jellysquid.mods.sodium.client.console.message.MessageLevel;
+import net.caffeinemc.mods.sodium.api.util.ColorARGB;
+import net.caffeinemc.mods.sodium.api.util.ColorU8;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.StringSplitter;
 import net.minecraft.client.gui.GuiGraphics;

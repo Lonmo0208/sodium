@@ -1,7 +1,6 @@
 package me.jellysquid.mods.sodium.client.render.chunk.translucent_sorting;
 
 import it.unimi.dsi.fastutil.objects.ReferenceArrayList;
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.SodiumClientMod;
 import me.jellysquid.mods.sodium.client.model.quad.properties.ModelQuadFacing;
 import me.jellysquid.mods.sodium.client.render.chunk.compile.ChunkBuildOutput;
@@ -12,6 +11,7 @@ import me.jellysquid.mods.sodium.client.render.chunk.translucent_sorting.data.*;
 import me.jellysquid.mods.sodium.client.render.chunk.translucent_sorting.trigger.GeometryPlanes;
 import me.jellysquid.mods.sodium.client.render.chunk.translucent_sorting.trigger.SortTriggering;
 import me.jellysquid.mods.sodium.client.render.chunk.vertex.format.ChunkVertexEncoder;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.minecraft.core.SectionPos;
 import net.minecraft.util.Mth;
 import org.joml.Vector3f;

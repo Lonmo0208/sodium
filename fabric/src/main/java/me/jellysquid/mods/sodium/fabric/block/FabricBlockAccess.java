@@ -1,8 +1,8 @@
 package me.jellysquid.mods.sodium.fabric.block;
 
-import me.jellysquid.mods.sodium.api.util.NormI8;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
 import me.jellysquid.mods.sodium.client.services.PlatformBlockAccess;
+import net.caffeinemc.mods.sodium.api.util.NormI8;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.util.TriState;
 import net.minecraft.client.renderer.RenderType;

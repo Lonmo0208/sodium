@@ -2,10 +2,10 @@ package me.jellysquid.mods.sodium.client.render.vertex.serializers;
 
 import it.unimi.dsi.fastutil.longs.Long2ReferenceMap;
 import it.unimi.dsi.fastutil.longs.Long2ReferenceOpenHashMap;
-import me.jellysquid.mods.sodium.api.vertex.format.VertexFormatDescription;
-import me.jellysquid.mods.sodium.api.vertex.serializer.VertexSerializer;
-import me.jellysquid.mods.sodium.api.vertex.serializer.VertexSerializerRegistry;
 import me.jellysquid.mods.sodium.client.render.vertex.serializers.generated.VertexSerializerFactory;
+import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
+import net.caffeinemc.mods.sodium.api.vertex.serializer.VertexSerializer;
+import net.caffeinemc.mods.sodium.api.vertex.serializer.VertexSerializerRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,9 +1,9 @@
 package me.jellysquid.mods.sodium.mixin.features.textures.animations.upload;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import me.jellysquid.mods.sodium.api.util.ColorMixer;
 import me.jellysquid.mods.sodium.client.util.NativeImageHelper;
 import me.jellysquid.mods.sodium.mixin.features.textures.SpriteContentsInvoker;
+import net.caffeinemc.mods.sodium.api.util.ColorMixer;
 import net.minecraft.client.renderer.texture.SpriteContents;
 import org.lwjgl.system.MemoryUtil;
 import org.spongepowered.asm.mixin.*;
