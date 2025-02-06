@@ -127,4 +127,6 @@ public interface ModelQuadView {
 
         return normal == 0 ? getFaceNormal() : normal;
     }
+
+    float[] getVertices();
 }

@@ -22,35 +22,22 @@ public class BakedModelEncoder {
     }
 
     public static void writeQuadVertices(VertexBufferWriter writer, PoseStack.Pose matrices, ModelQuadView quad, int color, int light, int overlay) {
-        Matrix3f matNormal = matrices.normal();
-        Matrix4f matPosition = matrices.pose();
-
-        try (MemoryStack stack = MemoryStack.stackPush()) {
-            long buffer = stack.nmalloc(4 * ModelVertex.STRIDE);
-            long ptr = buffer;
-
-            for (int i = 0; i < 4; i++) {
-                // The position vector
-                float x = quad.getX(i);
-                float y = quad.getY(i);
-                float z = quad.getZ(i);
-
-                int newLight = mergeLighting(quad.getLight(i), light);
-
-                // The packed transformed normal vector
-                int normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
-
-                // The transformed position vector
-                float xt = MatrixHelper.transformPositionX(matPosition, x, y, z);
-                float yt = MatrixHelper.transformPositionY(matPosition, x, y, z);
-                float zt = MatrixHelper.transformPositionZ(matPosition, x, y, z);
-
-                ModelVertex.write(ptr, xt, yt, zt, ColorHelper.multiplyColor(color, quad.getColor(i)), quad.getTexU(i), quad.getTexV(i), overlay, newLight, normal);
-                ptr += ModelVertex.STRIDE;
-            }
-
-            writer.push(stack, buffer, 4, ModelVertex.FORMAT);
+        // 获取顶点数组
+        float[] vertices = quad.getVertices();
+        int vertexCount = vertices.length;
+        float[] defaultBrightness = new float[vertexCount];
+        for (int i = 0; i < vertexCount; i++) {
+            defaultBrightness[i] = 1.0f;
         }
+        writeQuadVertices(writer, matrices, quad,
+                ColorU8.byteToNormalizedFloat(ColorABGR.unpackRed(color)),
+                ColorU8.byteToNormalizedFloat(ColorABGR.unpackGreen(color)),
+                ColorU8.byteToNormalizedFloat(ColorABGR.unpackBlue(color)),
+                ColorU8.byteToNormalizedFloat(ColorABGR.unpackAlpha(color)),
+                defaultBrightness,
+                false,
+                new int[]{light},
+                overlay);
     }
 
     public static void writeQuadVertices(VertexBufferWriter writer, PoseStack.Pose matrices, ModelQuadView quad, float r, float g, float b, float a, float[] brightnessTable, boolean colorize, int[] light, int overlay) {
@@ -61,48 +48,73 @@ public class BakedModelEncoder {
             long buffer = stack.nmalloc(4 * ModelVertex.STRIDE);
             long ptr = buffer;
 
-            for (int i = 0; i < 4; i++) {
-                // The position vector
+            // 如果 brightnessTable 为 null，使用默认亮度
+            if (brightnessTable == null) {
+                float[] vertices = quad.getVertices();
+                int vertexCount = vertices.length;
+                brightnessTable = new float[vertexCount];
+                for (int i = 0; i < vertexCount; i++) {
+                    brightnessTable[i] = 1.0f;
+                }
+            }
+
+            // 确保 brightnessTable 的长度与 quad 的顶点数相匹配
+            float[] vertices = quad.getVertices();
+            int vertexCount = vertices.length;
+            if (brightnessTable.length < vertexCount) {
+                // 如果 brightnessTable 的长度小于需要的顶点数，扩展数组
+                float[] newBrightnessTable = new float[vertexCount];
+                for (int i = 0; i < brightnessTable.length; i++) {
+                    newBrightnessTable[i] = brightnessTable[i];
+                }
+                for (int i = brightnessTable.length; i < vertexCount; i++) {
+                    newBrightnessTable[i] = 1.0f;
+                }
+                brightnessTable = newBrightnessTable;
+            }
+
+            for (int i = 0; i < vertexCount; i++) {
+                // 位置向量
                 float x = quad.getX(i);
                 float y = quad.getY(i);
                 float z = quad.getZ(i);
 
-                // The transformed position vector
+                // 变换后的位置向量
                 float xt = MatrixHelper.transformPositionX(matPosition, x, y, z);
                 float yt = MatrixHelper.transformPositionY(matPosition, x, y, z);
                 float zt = MatrixHelper.transformPositionZ(matPosition, x, y, z);
 
-                float fR;
-                float fG;
-                float fB;
+                // 法向量变换
+                int normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
 
-                var normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
+                // 计算光照
+                int newLight = mergeLighting(quad.getLight(i), light[i]);
 
-                float brightness = brightnessTable[i];
-
+                // 计算颜色
+                float fR, fG, fB;
                 if (colorize) {
                     int color = quad.getColor(i);
-
                     float oR = ColorU8.byteToNormalizedFloat(ColorABGR.unpackRed(color));
                     float oG = ColorU8.byteToNormalizedFloat(ColorABGR.unpackGreen(color));
                     float oB = ColorU8.byteToNormalizedFloat(ColorABGR.unpackBlue(color));
 
-                    fR = oR * brightness * r;
-                    fG = oG * brightness * g;
-                    fB = oB * brightness * b;
+                    fR = oR * brightnessTable[i] * r;
+                    fG = oG * brightnessTable[i] * g;
+                    fB = oB * brightnessTable[i] * b;
                 } else {
-                    fR = brightness * r;
-                    fG = brightness * g;
-                    fB = brightness * b;
+                    fR = brightnessTable[i] * r;
+                    fG = brightnessTable[i] * g;
+                    fB = brightnessTable[i] * b;
                 }
 
-                int color = ColorABGR.pack(fR, fG, fB, a);
+                int finalColor = ColorABGR.pack(fR, fG, fB, a);
 
-                ModelVertex.write(ptr, xt, yt, zt, color, quad.getTexU(i), quad.getTexV(i), overlay, light[i], normal);
+                // 写入顶点数据
+                ModelVertex.write(ptr, xt, yt, zt, finalColor, quad.getTexU(i), quad.getTexV(i), overlay, newLight, normal);
                 ptr += ModelVertex.STRIDE;
             }
 
-            writer.push(stack, buffer, 4, ModelVertex.FORMAT);
+            writer.push(stack, buffer, vertexCount, ModelVertex.FORMAT);
         }
     }
 }
