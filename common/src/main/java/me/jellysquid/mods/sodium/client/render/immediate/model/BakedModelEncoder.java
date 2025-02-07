@@ -11,6 +11,8 @@ import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryStack;
 
+import java.util.Arrays;
+
 public class BakedModelEncoder {
     private static int mergeLighting(int stored, int calculated) {
         if (stored == 0) return calculated;
@@ -21,13 +23,16 @@ public class BakedModelEncoder {
     }
 
     public static void writeQuadVertices(VertexBufferWriter writer, PoseStack.Pose matrices, ModelQuadView quad, int color, int light, int overlay) {
-        // 获取顶点数组
+        // 获取顶点数组并检查是否为空
         float[] vertices = quad.getVertices();
         int vertexCount = vertices.length;
-        float[] defaultBrightness = new float[vertexCount];
-        for (int i = 0; i < vertexCount; i++) {
-            defaultBrightness[i] = 1.0f;
+        if (vertexCount == 0) {
+            // 如果顶点数组为空，提前返回
+            return;
         }
+
+        float[] defaultBrightness = new float[vertexCount];
+        Arrays.fill(defaultBrightness, 1.0f);
         writeQuadVertices(writer, matrices, quad,
                 ColorU8.byteToNormalizedFloat(ColorABGR.unpackRed(color)),
                 ColorU8.byteToNormalizedFloat(ColorABGR.unpackGreen(color)),
@@ -47,25 +52,24 @@ public class BakedModelEncoder {
             long buffer = stack.nmalloc(4 * ModelVertex.STRIDE);
             long ptr = buffer;
 
+            // 获取顶点数组并检查是否为空
+            float[] vertices = quad.getVertices();
+            int vertexCount = vertices.length;
+            if (vertexCount == 0) {
+                // 如果顶点数组为空，提前返回
+                return;
+            }
+
             // 如果 brightnessTable 为 null，使用默认亮度
             if (brightnessTable == null) {
-                float[] vertices = quad.getVertices();
-                int vertexCount = vertices.length;
                 brightnessTable = new float[vertexCount];
                 for (int i = 0; i < vertexCount; i++) {
                     brightnessTable[i] = 1.0f;
                 }
-            }
-
-            // 确保 brightnessTable 的长度与 quad 的顶点数相匹配
-            float[] vertices = quad.getVertices();
-            int vertexCount = vertices.length;
-            if (brightnessTable.length < vertexCount) {
+            } else if (brightnessTable.length < vertexCount) {
                 // 如果 brightnessTable 的长度小于需要的顶点数，扩展数组
                 float[] newBrightnessTable = new float[vertexCount];
-                for (int i = 0; i < brightnessTable.length; i++) {
-                    newBrightnessTable[i] = brightnessTable[i];
-                }
+                System.arraycopy(brightnessTable, 0, newBrightnessTable, 0, brightnessTable.length);
                 for (int i = brightnessTable.length; i < vertexCount; i++) {
                     newBrightnessTable[i] = 1.0f;
                 }
