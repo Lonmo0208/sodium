@@ -9,12 +9,12 @@ import net.caffeinemc.mods.sodium.api.vertex.attributes.CommonVertexAttribute;
 import net.caffeinemc.mods.sodium.api.vertex.attributes.common.*;
 import net.caffeinemc.mods.sodium.api.vertex.buffer.VertexBufferWriter;
 import net.caffeinemc.mods.sodium.api.vertex.format.VertexFormatDescription;
-import org.lwjgl.system.MemoryStack;
-import org.lwjgl.system.MemoryUtil;
+import org.jetbrains.annotations.NotNull;
+import org.lwjgl.system.MemoryStack; import org.lwjgl.system.MemoryUtil;
 import org.spongepowered.asm.mixin.Unique;
 
-public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
-    private static final int ATTRIBUTE_NOT_PRESENT = -1;
+public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter
+{ private static final int ATTRIBUTE_NOT_PRESENT = -1;
 
     private static final int
             ATTRIBUTE_POSITION_BIT  = 1 << CommonVertexAttribute.POSITION.ordinal(),
@@ -228,14 +228,14 @@ public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
     }
 
     @Override
-    public VertexConsumer vertex(double x, double y, double z) {
+    public @NotNull VertexConsumer vertex(double x, double y, double z) {
         this.putPositionAttribute((float) x, (float) y, (float) z);
 
         return this;
     }
 
     @Override
-    public VertexConsumer color(int red, int green, int blue, int alpha) {
+    public @NotNull VertexConsumer color(int red, int green, int blue, int alpha) {
         if (this.builder.sodium$hasDefaultColor()) {
             throw new IllegalStateException();
         }
@@ -246,7 +246,7 @@ public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
     }
 
     @Override
-    public VertexConsumer color(int argb) { // No, this isn't a typo. One method takes RGBA, but this one takes ARGB.
+    public @NotNull VertexConsumer color(int argb) { // No, this isn't a typo. One method takes RGBA, but this one takes ARGB.
         if (this.builder.sodium$hasDefaultColor()) {
             throw new IllegalStateException();
         }
@@ -262,14 +262,14 @@ public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
     }
 
     @Override
-    public VertexConsumer uv(float u, float v) {
+    public @NotNull VertexConsumer uv(float u, float v) {
         this.putTextureAttribute(u, v);
 
         return this;
     }
 
     @Override
-    public VertexConsumer overlayCoords(int uv) {
+    public @NotNull VertexConsumer overlayCoords(int uv) {
         this.putOverlayAttribute(uv);
 
         return this;
@@ -277,13 +277,13 @@ public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
 
 
     @Override
-    public VertexConsumer uv2(int uv) {
+    public @NotNull VertexConsumer uv2(int uv) {
         this.putLightAttribute(uv);
 
         return this;
     }
     @Override
-    public VertexConsumer normal(float x, float y, float z) {
+    public @NotNull VertexConsumer normal(float x, float y, float z) {
         this.putNormalAttribute(NormI8.pack(x, y, z));
 
         return this;
@@ -317,12 +317,12 @@ public class SodiumBufferBuilder implements VertexConsumer, VertexBufferWriter {
     }
 
     @Override
-    public VertexConsumer uv2(int u, int v) {
+    public @NotNull VertexConsumer uv2(int u, int v) {
         return this.uv2(packU16x2(u, v));
     }
 
     @Override
-    public VertexConsumer overlayCoords(int u, int v) {
+    public @NotNull VertexConsumer overlayCoords(int u, int v) {
         return this.overlayCoords(packU16x2(u, v));
     }
 

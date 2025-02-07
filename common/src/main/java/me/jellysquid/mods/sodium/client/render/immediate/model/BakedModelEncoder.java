@@ -13,9 +13,9 @@ import org.joml.Matrix4f;
 import org.lwjgl.system.MemoryStack;
 
 public class BakedModelEncoder {
+
     private static int mergeLighting(int stored, int calculated) {
         if (stored == 0) return calculated;
-
         int blockLight = Math.max(stored & 0xFFFF, calculated & 0xFFFF);
         int skyLight = Math.max((stored >> 16) & 0xFFFF, (calculated >> 16) & 0xFFFF);
         return blockLight | (skyLight << 16);
@@ -30,22 +30,16 @@ public class BakedModelEncoder {
             long ptr = buffer;
 
             for (int i = 0; i < 4; i++) {
-                // The position vector
-                float x = quad.getX(i);
-                float y = quad.getY(i);
-                float z = quad.getZ(i);
-
+                float x = quad.getX(i), y = quad.getY(i), z = quad.getZ(i);
                 int newLight = mergeLighting(quad.getLight(i), light);
-
-                // The packed transformed normal vector
                 int normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
 
-                // The transformed position vector
                 float xt = MatrixHelper.transformPositionX(matPosition, x, y, z);
                 float yt = MatrixHelper.transformPositionY(matPosition, x, y, z);
                 float zt = MatrixHelper.transformPositionZ(matPosition, x, y, z);
 
-                ModelVertex.write(ptr, xt, yt, zt, ColorHelper.multiplyColor(color, quad.getColor(i)), quad.getTexU(i), quad.getTexV(i), overlay, newLight, normal);
+                ModelVertex.write(ptr, xt, yt, zt, ColorHelper.multiplyColor(color, quad.getColor(i)),
+                        quad.getTexU(i), quad.getTexV(i), overlay, newLight, normal);
                 ptr += ModelVertex.STRIDE;
             }
 
@@ -53,7 +47,9 @@ public class BakedModelEncoder {
         }
     }
 
-    public static void writeQuadVertices(VertexBufferWriter writer, PoseStack.Pose matrices, ModelQuadView quad, float r, float g, float b, float a, float[] brightnessTable, boolean colorize, int[] light, int overlay) {
+    public static void writeQuadVertices(VertexBufferWriter writer, PoseStack.Pose matrices, ModelQuadView quad,
+                                         float r, float g, float b, float a, float[] brightnessTable,
+                                         boolean colorize, int[] light, int overlay) {
         Matrix3f matNormal = matrices.normal();
         Matrix4f matPosition = matrices.pose();
 
@@ -62,34 +58,20 @@ public class BakedModelEncoder {
             long ptr = buffer;
 
             for (int i = 0; i < 4; i++) {
-                // The position vector
-                float x = quad.getX(i);
-                float y = quad.getY(i);
-                float z = quad.getZ(i);
-
-                // The transformed position vector
+                float x = quad.getX(i), y = quad.getY(i), z = quad.getZ(i);
                 float xt = MatrixHelper.transformPositionX(matPosition, x, y, z);
                 float yt = MatrixHelper.transformPositionY(matPosition, x, y, z);
                 float zt = MatrixHelper.transformPositionZ(matPosition, x, y, z);
 
-                float fR;
-                float fG;
-                float fB;
-
-                var normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
-
+                int normal = MatrixHelper.transformNormal(matNormal, true, quad.getAccurateNormal(i));
                 float brightness = brightnessTable[i];
 
+                float fR, fG, fB;
                 if (colorize) {
                     int color = quad.getColor(i);
-
-                    float oR = ColorU8.byteToNormalizedFloat(ColorABGR.unpackRed(color));
-                    float oG = ColorU8.byteToNormalizedFloat(ColorABGR.unpackGreen(color));
-                    float oB = ColorU8.byteToNormalizedFloat(ColorABGR.unpackBlue(color));
-
-                    fR = oR * brightness * r;
-                    fG = oG * brightness * g;
-                    fB = oB * brightness * b;
+                    fR = ColorU8.byteToNormalizedFloat(ColorABGR.unpackRed(color)) * brightness * r;
+                    fG = ColorU8.byteToNormalizedFloat(ColorABGR.unpackGreen(color)) * brightness * g;
+                    fB = ColorU8.byteToNormalizedFloat(ColorABGR.unpackBlue(color)) * brightness * b;
                 } else {
                     fR = brightness * r;
                     fG = brightness * g;
@@ -97,7 +79,6 @@ public class BakedModelEncoder {
                 }
 
                 int color = ColorABGR.pack(fR, fG, fB, a);
-
                 ModelVertex.write(ptr, xt, yt, zt, color, quad.getTexU(i), quad.getTexV(i), overlay, light[i], normal);
                 ptr += ModelVertex.STRIDE;
             }
