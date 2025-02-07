@@ -2,7 +2,6 @@ package me.jellysquid.mods.sodium.client.render.immediate.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import me.jellysquid.mods.sodium.client.model.quad.ModelQuadView;
-import me.jellysquid.mods.sodium.client.render.frapi.helper.ColorHelper;
 import net.caffeinemc.mods.sodium.api.math.MatrixHelper;
 import net.caffeinemc.mods.sodium.api.util.ColorABGR;
 import net.caffeinemc.mods.sodium.api.util.ColorU8;
@@ -109,7 +108,6 @@ public class BakedModelEncoder {
 
                 int finalColor = ColorABGR.pack(fR, fG, fB, a);
 
-                // 写入顶点数据
                 ModelVertex.write(ptr, xt, yt, zt, finalColor, quad.getTexU(i), quad.getTexV(i), overlay, newLight, normal);
                 ptr += ModelVertex.STRIDE;
             }
