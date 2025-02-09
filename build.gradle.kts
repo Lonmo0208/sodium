@@ -84,7 +84,7 @@ subprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-        options.release.set(21)
+        options.release.set(17)
     }
 
     // Disables Gradle's custom module metadata from being published to maven. The
