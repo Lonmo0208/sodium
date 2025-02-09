@@ -6,7 +6,7 @@ plugins {
 }
 
 val MINECRAFT_VERSION by extra { "1.20.1" }
-val NEOFORGE_VERSION by extra { "47.3.22" }
+val NEOFORGE_VERSION by extra { "47.3.29" }
 val FABRIC_LOADER_VERSION by extra { "0.16.10" }
 val FABRIC_API_VERSION by extra { "0.92.3+1.20.1" }
 
@@ -44,7 +44,7 @@ repositories {
 subprojects {
     apply(plugin = "maven-publish")
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 
     fun createVersionString(): String {
