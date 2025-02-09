@@ -192,7 +192,7 @@ tasks {
     jar { finalizedBy("reobfJar") }
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 publishing {
     publications {
