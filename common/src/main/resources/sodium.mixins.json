@@ -18,6 +18,7 @@
     "core.model.colors.BlockColorsMixin",
     "core.model.colors.ItemColorsMixin",
     "core.model.quad.BakedQuadMixin",
+    "core.render.BlockEntityTypeMixin",
     "core.render.VertexFormatAccessor",
     "core.render.chunk.LiquidBlockRendererMixin",
     "core.render.frustum.FrustumMixin",
